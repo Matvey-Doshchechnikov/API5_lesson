@@ -56,9 +56,11 @@ def predict_rub_salary_hh(language):
                 salaries.append(vacancy_salary)
     average_salary, vacancies_processed = count_average_salary(salaries)
     vacancies_amount = page['found']
-    language_statistic['vacancies_found'] = vacancies_amount
-    language_statistic['vacancies_processed'] = vacancies_processed
-    language_statistic['average_salary'] = average_salary
+    language_statistic = {
+        'vacancies_found' : vacancies_amount,
+        'vacancies_processed' : vacancies_processed,
+        'average_salary' : average_salary
+    }
     return language_statistic
 
 
@@ -102,9 +104,11 @@ def predict_rub_salary_for_superJob(language, superjob_token):
         vacancy_amount += page['total']
         more_pages = page['more']
     average_salary, processed_vacancies = count_average_salary(salaries)
-    language_statistic['vacancies_found'] = vacancy_amount
-    language_statistic['vacancies_processed'] = processed_vacancies
-    language_statistic['average_salary'] = int(average_salary)
+    language_statistic = {
+        'vacancies_found' : vacancy_amount,
+        'vacancies_processed' : processed_vacancies,
+        'average_salary' : int(average_salary)
+    }
     return language_statistic
 
 
@@ -132,7 +136,7 @@ def create_table(title, statistic):
 
 def main():
     load_dotenv()
-    superjob_token = os.environ['sj_token']
+    superjob_token = os.environ['SJ_TOKEN']
     programming_languages = [
         "Python",
         "C++",
